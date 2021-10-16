@@ -2,6 +2,13 @@ from rental import Rental
 from movie import Movie
 
 
+def calculate_frequent_renter_points(rental, frequent_renter_points=0):
+    if rental.get_movie().get_price_code() == Movie.NEW_RELEASE:
+        frequent_renter_points += rental.get_days_rented()
+    else:
+        frequent_renter_points += 1
+    return frequent_renter_points
+
 class Customer:
     """
        A customer who rents movies.
@@ -37,10 +44,7 @@ class Customer:
 
         for rental in self.rentals:
             # award renter points
-            if rental.get_movie().get_price_code() == Movie.NEW_RELEASE:
-                frequent_renter_points += rental.get_days_rented()
-            else:
-                frequent_renter_points += 1
+            frequent_renter_points = calculate_frequent_renter_points(rental, frequent_renter_points)
             #  add detail line to statement
             statement += fmt.format(rental.get_movie().get_title(), rental.get_days_rented(), rental.get_charge())
             # and accumulate activity
