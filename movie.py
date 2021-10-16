@@ -26,7 +26,7 @@ class PriceCode(Enum):
 
 class Movie:
     """A movie available for rent."""
-	
+
     # The types of movies (price_code).
     REGULAR = PriceCode.regular
     NEW_RELEASE = PriceCode.new_release
