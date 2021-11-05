@@ -1,9 +1,9 @@
-from rental import PriceCode
-
 class Movie:
     """A movie available for rent."""
 
-    def __init__(self, title):
+    # The types of movies (price_code).
+
+    def __init__(self, title, price_code):
         # Initialize a new movie.
         self.title = title
 
