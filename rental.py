@@ -1,4 +1,5 @@
 from enum import Enum
+from datetime import datetime
 
 
 class PriceCode(Enum):
@@ -22,6 +23,17 @@ class PriceCode(Enum):
         """Return the rental price for a given number of days."""
         frp = self.value["frp"]
         return frp(days)
+
+    @classmethod
+    def for_movie(cls, movie):
+        current_year = str(datetime.now().year)
+        children_genre = "Children"
+        if movie.get_year() == current_year:
+            return cls.new_release
+        elif children_genre in movie.get_genre():
+            return cls.children
+        else:
+            return cls.regular
 
 
 class Rental:
