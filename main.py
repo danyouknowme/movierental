@@ -8,11 +8,11 @@ from customer import Customer
 
 def make_movies():
     movies = [
-        Movie("The Irishman", PriceCode.new_release),
-        Movie("CitizenFour", PriceCode.regular),
-        Movie("Frozen", PriceCode.children),
-        Movie("El Camino", PriceCode.new_release),
-        Movie("Particle Fever", PriceCode.regular),
+        Movie("The Irishman", "2019", ["Mafia", "Drama", "Epic"]),
+        Movie("CitizenFour", "2014", ["Documentary", "Historical Documentary"]),
+        Movie("Frozen", "2013", ["Adventure", "Children", "Cartoon","Musical", "Comedy", "Fantasy"]),
+        Movie("El Camino", "2019", ["Western", "Drama", "Crime"]),
+        Movie("Particle Fever", "2013", ["Documentary", "Science fiction"]),
     ]
     return movies
 

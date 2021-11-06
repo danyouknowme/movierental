@@ -9,6 +9,7 @@ class Customer:
        movies rented for the current billing period,
        and can print a statement of his rentals.
     """
+
     def __init__(self, name: str):
         """ Initialize a new customer."""
         self.name = name
@@ -37,17 +38,20 @@ class Customer:
 
         for rental in self.rentals:
             # award renter points
-            frequent_renter_points = rental.get_frequent_renter_points(frequent_renter_points)
+            frequent_renter_points = rental.get_frequent_renter_points(
+                frequent_renter_points)
             #  add detail line to statement
-            statement += fmt.format(rental.get_movie().get_title(), rental.get_days_rented(), rental.get_charge())
+            statement += fmt.format(rental.get_movie().get_title(),
+                                    rental.get_days_rented(), rental.get_charge())
             # and accumulate activity
             total_amount += rental.get_charge()
 
         # footer: summary of charges
         statement += "\n"
         statement += "{:32s} {:6s} {:6.2f}\n".format(
-                       "Total Charges", "", total_amount)
-        statement += "Frequent Renter Points earned: {}\n".format(frequent_renter_points)
+            "Total Charges", "", total_amount)
+        statement += "Frequent Renter Points earned: {}\n".format(
+            frequent_renter_points)
 
         return statement
 
@@ -55,8 +59,9 @@ class Customer:
 if __name__ == "__main__":
     customer = Customer("Edward Snowden")
     print(customer.statement())
-    movie = Movie("Hacker Noon", PriceCode.regular)
+    movie = Movie("Hacker Noon", "2014", ["Technology", "Action"])
     customer.add_rental(Rental(movie, 2))
-    movie = Movie("CitizenFour", PriceCode.new_release)
+    movie = Movie("CitizenFour", "2014", [
+                "Documentary", "Historical Documentary"])
     customer.add_rental(Rental(movie, 3))
     print(customer.statement())
