@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 import csv
 
 class Movie:
@@ -6,16 +6,16 @@ class Movie:
 
     # The types of movies (price_code).
 
-    def __init__(self, title, year, genre):
+    def __init__(self, title: str, year: str, genre):
         # Initialize a new movie.
         self.title = title
         self.year = year
         self.genre: List[str] = genre
 
-    def get_title(self):
+    def get_title(self) -> str:
         return self.title
 
-    def get_year(self):
+    def get_year(self) -> str:
         return self.year
 
     def get_genre(self) -> List[str]:
@@ -25,7 +25,7 @@ class Movie:
         """Returns true if the string parameter matches one of the movie’s genre."""
         return movie in self.genre
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
 
@@ -41,7 +41,7 @@ class MovieCatalog:
         for i in read_file:
             self.movies_list[i[1]] = Movie(i[1], i[2], i[3].split("|"))
 
-    def get_movie(self, title):
+    def get_movie(self, title: str) -> Union[str, None]:
         try:
             return self.movies_list[title]
         except KeyError:

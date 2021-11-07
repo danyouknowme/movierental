@@ -19,10 +19,10 @@ class Customer:
         if rental not in self.rentals:
             self.rentals.append(rental)
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.name
 
-    def statement(self):
+    def statement(self) -> str:
         """
             Print all the rentals in current period,
             along with total charges and reward points.

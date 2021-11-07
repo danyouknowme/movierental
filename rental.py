@@ -1,5 +1,7 @@
+from __future__ import annotations
 from enum import Enum
 from datetime import datetime
+from movie import Movie
 
 
 class PriceCode(Enum):
@@ -14,18 +16,18 @@ class PriceCode(Enum):
                 "frp": lambda days: 1,
                 }
 
-    def price(self, days: int):
+    def price(self, days: int) -> float:
         """Return the rental price for a given number of days."""
         pricing = self.value["price"]    # the enum member's price formula
         return pricing(days)
 
-    def frequent_renter_points(self, days: int):
+    def frequent_renter_points(self, days: int) -> float:
         """Return the rental price for a given number of days."""
         frp = self.value["frp"]
         return frp(days)
 
     @classmethod
-    def for_movie(cls, movie):
+    def for_movie(cls, movie: Movie) -> PriceCode:
         current_year = str(datetime.now().year)
         children_genre = "Children"
         if movie.get_year() == current_year:
@@ -48,24 +50,24 @@ class Rental:
     field is used.
     """
 
-    def __init__(self, movie, days_rented):
+    def __init__(self, movie: Movie, days_rented: int):
         """Initialize a new movie rental object for
         a movie with known rental period (daysRented).
         """
         self.movie = movie
         self.days_rented = days_rented
-        self.price_code = PriceCode.for_movie(movie)
+        self.price_code: float = PriceCode.for_movie(movie)
 
-    def get_movie(self):
+    def get_movie(self) -> str:
         return self.movie
 
-    def get_days_rented(self):
+    def get_days_rented(self) -> int:
         return self.days_rented
 
-    def get_charge(self):
+    def get_charge(self) -> float:
         return self.price_code.price(self.days_rented)
 
-    def get_frequent_renter_points(self, frequent_renter_points=0):
+    def get_frequent_renter_points(self, frequent_renter_points: float = 0) -> float:
         frequent_renter_points += self.price_code.frequent_renter_points(
             self.days_rented)
         return frequent_renter_points
